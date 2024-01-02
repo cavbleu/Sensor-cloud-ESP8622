@@ -1,0 +1,150 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Adding CSS JS Image Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1251"/>
+    <style>
+        h1 {
+            color: #25a7e7;
+            text-align: center;
+        }
+        .receipt-header {
+            width: 100%;
+        }
+        .receipt {
+            width: 100%;
+        }
+        .receipt, .receipt th, .receipt td {
+            border: 1px solid #25a7e7;
+            border-collapse: collapse;
+            color: darkblue;
+        }
+        .receipt th {
+            background-color: #25a7e7;
+            color: white;
+        }
+        .total {
+            text-align: right;
+        }
+        .table {
+            width: 100%;
+            border: none;
+            margin-bottom: 20px;
+        }
+        .table thead th {
+            font-weight: bold;
+            text-align: left;
+            border: none;
+            padding: 10px 15px;
+            background: #d8d8d8;
+            font-size: 14px;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+        }
+        .table tbody td {
+            text-align: left;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            padding: 10px 15px;
+            font-size: 14px;
+            vertical-align: top;
+        }
+        .table thead tr th:first-child, .table tbody tr td:first-child {
+            border-left: none;
+        }
+        .table thead tr th:last-child, .table tbody tr td:last-child {
+            border-right: none;
+        }
+        .table tbody tr:nth-child(even){
+            background: #f3f3f3;
+        }
+    </style>
+<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>-->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"/>-->
+<!--    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>-->
+</head>
+<body>
+<div>
+    <h1>Cabin data</h1>
+    <a>Export is only possible in English due to encoding issues during export!</a>
+    <table>
+        <tr>
+            <td>
+                <table>
+                    <tr>
+                        <th th:text="'Export data:'"></th>
+                    </tr>
+                    <tr>
+                        <td th:text="'Cabin name: ' + ${export.nameRoom}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="'Date export: ' + ${export.dateExport}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="'Launch date: ' + ${export.dateStart}"></td>
+                    </tr>
+                    <tr>
+                        <td th:text="'Stop date: ' + ${export.dateStop}"></td>
+                    </tr>
+                </table>
+            </td>
+            <td align="right">
+                <br />
+                Only English!
+            </td>
+        </tr>
+    </table>
+
+
+    <div th:switch="${sendataList}">
+        <div th:case="*">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>
+                        <a>Cabin name</a>
+                    </th>
+                    <th>
+                        <a>Date</a>
+                    </th>
+                    <th>
+                        <a>Time</a>
+                    </th>
+                    <th>
+                    <a>Crash</a>
+                    </th>
+                    <th>
+                        <a>Temp</a>
+                    </th>
+                    <th>
+                        <a>Humidity</a>
+                    </th>
+                    <th>
+                        <a>Pressure</a>
+                    </th>
+                    <th>
+                        <a>CO</a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="sendata: ${sendataList}">
+                    <td th:text="${export.nameRoom}"/>
+                    <td th:text="${sendata.datesend}"/>
+                    <td th:text="${sendata.timesend}"/>
+                    <td th:text="${sendata.crash}"/>
+                    <td th:text="${sendata.temperature}"/>
+                    <td th:text="${sendata.humidity}"/>
+                    <td th:text="${sendata.pressure}"/>
+                    <td th:text="${sendata.co}"/>
+                </tr>
+                </tbody>
+
+            </table>
+    </div>
+</div>
+</div>
+</body>
+</html>

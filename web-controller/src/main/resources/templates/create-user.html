@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавление пользователя</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+<div th:replace="~{frag-navigation :: nav_bar}"></div>
+<div class="container-fluid">
+  <div class="row">
+      <nav th:replace="~{frag-container :: container}"></nav>
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+      <div>
+        <h2>Добавление пользователя</h2>
+        <form th:action="@{/users/create}" method="post" th:object="${newuser}" class="px-4">
+          <div class="mb-3 row">
+            <div>
+<!--              <label for="firstname" class="col-sm-2 col-form-label">Фамилия</label>-->
+              <div class="col-sm-6">
+                <input type="text"  id="firstname" autofocus="autofocus"
+                       class="form-control" required name="firstname" th:field="*{firstname}" placeholder="Фамилия" >
+              </div>
+              <br>
+            </div>
+            <div>
+<!--              <label for="lastname" class="col-sm-2 col-form-label">Имя</label>-->
+              <div class="col-sm-6">
+                <input type="text"  id="lastname" autofocus="autofocus"
+                       class="form-control" required name="firstname" th:field="*{lastname}" placeholder="Имя" >
+              </div>
+              <br>
+            </div>
+            <div>
+<!--              <label for="username" class="col-sm-2 col-form-label">Логин:</label>-->
+              <div class="col-sm-6">
+                <input type="text"  id="username" autofocus="autofocus"
+                       class="form-control" required name="username" th:field="*{username}" placeholder="Логин" >
+              </div>
+              <br>
+            </div>
+            <div>
+<!--              <label for="password" class="col-sm-2 col-form-label">Пароль:</label>-->
+              <div class="col-sm-6">
+                <input type="password" id="password" autofocus="autofocus"
+                       class="form-control" required name="password" th:field="*{password}"  placeholder="Пароль">
+              </div>
+              <br>
+            </div >
+            <div class="col-sm-6">
+              <div class="form-group">
+<!--              <label for="role" class="col-sm-2 col-form-label">Роль:</label>-->
+              <select class="form-control " id="role" th:field="*{role}" >
+                <option hidden value="">Выберете роль</option>
+                <option
+                          th:each="role : ${T(com.cavbleu.kh.webcontroller.modelDTO.Role).values()}"
+                          th:value="${role}"
+                          th:text="${role.toString}">
+                </option>
+              </select>
+              </div>
+            </div>
+            <div>
+              <div class="form-check form-switch">
+                <br>
+                <input type="checkbox" required name="isEnabled" id="isEnabled" value=""
+                       class="form-check-input" th:field="*{isEnabled}" >
+<!--                th:checked="${isEnabled.getActive()}"-->
+                <label for="isEnabled" class="col-sm-2 col-form-label">Активный пользователь?</label>
+            </div>
+            </div>
+          </div>
+          <div>
+            <button type="submit" class="btn btn-success">Добавить</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+</div>
+<script th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.slim.min.js}"></script>
+<!--Icons-->
+<script th:src="@{/js/feather.min.js}"></script>
+<script>
+    feather.replace()
+</script>
+</body>
+</html>
+
