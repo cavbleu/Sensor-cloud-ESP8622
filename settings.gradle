@@ -1,0 +1,4 @@
+rootProject.name = 'cloud-sensor'
+
+include 'base-sensors', 'eureka-server', 'gateway', 'web-controller', 'entityDTO'
+

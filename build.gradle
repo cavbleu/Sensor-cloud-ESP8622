@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'com.cavbleu.kh'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+
+
+dependencies {
+//    implementation project(':base-sensors')
+//    implementation project(':eureka-server')
+//    implementation project(':gateway')
+//    implementation project(':web-controller')
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
