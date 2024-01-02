@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="utf-8"/>
+    <title>Список данных</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+
+<body>
+<div th:replace="~{frag-navigation :: nav_bar}"></div>
+<div class="container-fluid">
+    <div class="row">
+        <nav th:replace="~{frag-container :: container}"></nav>
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+            <h1 class="h2">Все данные по кабине:</h1>
+            <a th:text="${sensor}"></a>
+            <div class="btn-group mr-2">
+<!--                <button class="btn btn-sm btn-outline-secondary">Share</button>-->
+                <a href="#" th:href="@{/main/exportPdf/{id}(id=${idsen})}" class="btn btn-sm btn-outline-secondary">Экспорт</a>
+<!--                <button href="#" th:href="@{/main/exportPdf}" class="btn btn-sm btn-outline-secondary" >Export</button>-->
+<!--                <button class="btn btn-sm btn-outline-secondary dropdown-toggle">-->
+<!--                    <span data-feather="calendar"></span>-->
+<!--                    Эта неделя-->
+<!--                </button>-->
+            </div>
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+
+
+
+
+
+            <div th:switch="${sendataList}">
+                <h3 th:case="null">Нет данных для отображения</h3>
+                <div th:case="*">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th hidden>
+<!--                                <a th:href="@{'/main/sensors/'+ ${idsens}+'/page/' + ${currentPage}}" >-->
+                                    <a>
+                                    id</a>
+                            </th>
+                            <th>
+<!--                                <a th:href="@{'/main/sensors/'+ ${idsens}+'/page/' + ${currentPage}}" >&ndash;&gt;-->
+                                <a>
+                                    Номер кабины</a>
+                            </th>
+                            <th>
+<!--                                <a th:href="@{'/main/sensors/'+ ${idsens}+'/page/' + ${currentPage}}" >&ndash;&gt;-->
+                                <a>
+                                    Дата</a>
+                            </th>
+                            <th>
+<!--                                <a th:href="@{'/main/sensors/'+ ${idsens}+'/page/' + ${currentPage}}" >&ndash;&gt;-->
+                                <a>
+                                    Время</a>
+                            </th>
+                            <th>
+<!--                                <a th:href="@{'/main/sensors/'+ ${idsens}+'/page/' + ${currentPage}}" >&ndash;&gt;-->
+                                <a>
+                                    Авария</a>
+                            </th>
+                            <th>
+<!--                                <a th:href="@{'/main/sensors/'+ ${idsens}+'/page/' + ${currentPage}}" >&ndash;&gt;-->
+                                <a>
+                                    Температура</a>
+                            </th>
+                            <th>
+<!--                                <a th:href="@{'/main/sensors/'+ ${idsens}+'/page/' + ${currentPage}}" >&ndash;&gt;-->
+                                <a>
+                                    Влажность</a>
+                            </th>
+                            <th>
+<!--                                <a th:href="@{'/main/sensors/'+ ${idsens}+'/page/' + ${currentPage}}" >&ndash;&gt;-->
+                                <a>
+                                    Давление</a>
+                            </th>
+                            <th>
+<!--                                <a th:href="@{'/main/sensors/'+ ${idsens}+'/page/' + ${currentPage}}" >&ndash;&gt;-->
+                                <a>
+                                    Газ</a>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="sendata: ${sendataList}">
+                            <td th:text="${sendata.id}" hidden/>
+                            <td th:text="${sendata.idsen}"/>
+                            <td th:text="${sendata.datesend}"/>
+                            <td th:text="${sendata.timesend}"/>
+                            <td th:text="${sendata.crash}"/>
+                            <td th:text="${sendata.temperature}"/>
+                            <td th:text="${sendata.humidity}"/>
+                            <td th:text="${sendata.pressure}"/>
+                            <td th:text="${sendata.co}"/>
+                        </tr>
+                        </tbody>
+
+                    </table>
+                        <div class = "row col-sm-10">
+                            <div class = "col-sm-2">
+                                Кол-во данных: [[${totalItems}]]
+                            </div>
+                            <div class = "col-sm-1">
+                                <div th:if = "${currentPage < totalPages}">
+                                    </div>
+                                <div class = "col-sm-1">
+                                        <a th:if="${currentPage > 1}" th:href="@{'/main/sensors/' + ${idsen} +'/page/' + ${1}}">Начало</a>
+                                        <a th:if="${((currentPage < totalPages) and (currentPage > 1)) or (currentPage > 1)}" th:href="@{'/main/sensors/' + ${idsen} +'/page/' + ${currentPage - 1}}">Назад</a>
+                                        <a th:if="${currentPage < totalPages}" th:href="@{'/main/sensors/' + ${idsen} +'/page/' + ${currentPage + 1}}">Далее</a>
+                                        <a th:if="${currentPage < totalPages}" th:href="@{'/main/sensors/' + ${idsen} +'/page/' + ${totalPages}}">Конец</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <br>
+
+                        </div>
+                    </div>
+                </div>
+        </main>
+    </div>
+</div>
+<script th:src="@{/js/jquery-3.2.1.slim.min.js}"></script>
+<script th:src="@{/js/popper.min.js}"></script>
+<script th:src="@{/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/jquery.slim.min.js}"></script>
+<!--Icons-->
+<script th:src="@{/js/feather.min.js}"></script>
+<script>
+    feather.replace()
+</script>
+</body>
+</html>
+
+
+
