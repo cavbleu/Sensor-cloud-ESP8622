@@ -5,7 +5,7 @@ plugins {
 }
 
 group = 'com.cavbleu.kh'
-version = '1.0.1'
+version = '0.1.1'
 
 java {
     sourceCompatibility = '17'
